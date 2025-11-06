@@ -1,8 +1,16 @@
-from fastapi import FastAPI
-from app.services import train_model
+from fastapi import APIRouter, HTTPException
+from app.schemas.schemas import TrainRequest, TrainResponse
+from app.services.train_model import train
 
-app = FastAPI()
+router = APIRouter(prefix="/train", tags=["Training"])
 
-@app.post("/train_model")
-async def train(penalty: str = 'l2', max_iter: int = 100):
-    return train_model.train(penalty, max_iter)
+@router.post("/", response_model=TrainResponse)
+async def train_model(request: TrainRequest):
+    """
+    Train a Logistic Regression model and save it in a timestamped folder.
+    """
+    try:
+        result = await train(request.penalty, request.max_iter)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Training failed: {e}")
