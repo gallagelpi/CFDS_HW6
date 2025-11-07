@@ -1,0 +1,13 @@
+{
+  "age": 56,
+  "bmi": 27.4,
+  "heart_rate_apache": 88,
+  "temp_apache": 37.1,
+  "map_apache": 91,
+  "resprate_apache": 19,
+  "glucose_apache": 122,
+  "creatinine_apache": 1.2,
+  "wbc_apache": 8.4,
+  "gender": "M",
+  "ethnicity": "WHITE"
+}
