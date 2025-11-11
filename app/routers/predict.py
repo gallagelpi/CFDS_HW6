@@ -1,4 +1,10 @@
 from fastapi import APIRouter, HTTPException
+from app.schemas.schemas import PredictRequest, PredictResponse
+from app.services.predict import predict_datapoint
+
+router = APIRouter(prefix="/predict", tags=["Prediction"])
+
+@router.post("/", response_model=PredictResponse)
 from app.schemas.schemas import PredictRequest
 from app.services.predict import predict_datapoint
 
@@ -28,4 +34,5 @@ async def predict(request: PredictRequest):
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {e}")
         raise HTTPException(status_code=500, detail=f"Prediction failed: {e}")

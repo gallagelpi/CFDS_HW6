@@ -1,5 +1,8 @@
 from pydantic import BaseModel
 
+# ============================================================
+# 🧠 PREDICTION SCHEMAS
+# ============================================================
 # Schemas of predict endpoint
 
 class PredictRequest(BaseModel):
@@ -23,8 +26,18 @@ class PredictResponse(BaseModel):
     predicted_class: int
 
 
+# ============================================================
+# 🧩 TRAINING SCHEMAS
+# ============================================================
 #Schemas of train_model endpoint
 
 class TrainRequest(BaseModel):
     penalty: str = "l2"
     max_iter: int = 100
+
+
+class TrainResponse(BaseModel):
+    message: str
+    model_path: str
+    penalty: str
+    max_iter: int
