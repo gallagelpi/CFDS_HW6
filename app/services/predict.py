@@ -22,7 +22,7 @@ async def predict_datapoint(
     predicts diabetes probability for a single ICU datapoint.
     """
 
-    # 1️⃣ Find latest model
+    # Find latest model
     models_dir = Path("../models")
     if not models_dir.exists() or not any(models_dir.iterdir()):
         raise FileNotFoundError("No trained models found in ../models directory.")
@@ -30,10 +30,10 @@ async def predict_datapoint(
     latest_folder = max(models_dir.iterdir(), key=lambda f: f.stat().st_mtime)
     model_path = latest_folder / "logistic_regression_model.pkl"
 
-    # 2️⃣ Load pipeline (includes preprocessing + model)
+    # Load pipeline (includes preprocessing + model)
     model = joblib.load(model_path)
 
-    # 3️⃣ Prepare input dataframe — same columns used in training
+    # Prepare input dataframe — same columns used in training
     # Read the model
     model_path = "app/logistic_regression_model.pkl"
 
@@ -58,11 +58,11 @@ async def predict_datapoint(
         "ethnicity": ethnicity
     }])
 
-    # 4️⃣ Predict probability and class
+    # Predict probability and class
     y_pred_prob = float(model.predict_proba(X_new)[0, 1])
     y_pred_class = int(model.predict(X_new)[0])
 
-    # 5️⃣ Return structured response
+    # Return structured response
     # Predict probability and class
     y_pred_prob = float(model.predict_proba(X_new)[0, 1])
     y_pred_class = int(model.predict(X_new)[0])
@@ -73,4 +73,4 @@ async def predict_datapoint(
         probability_diabetes=y_pred_prob,
         predicted_class=y_pred_class
     )
-    )
+    

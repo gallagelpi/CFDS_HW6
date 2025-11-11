@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 # ============================================================
-# 🧠 PREDICTION SCHEMAS
+# PREDICTION SCHEMAS
 # ============================================================
 # Schemas of predict endpoint
 
@@ -27,7 +27,7 @@ class PredictResponse(BaseModel):
 
 
 # ============================================================
-# 🧩 TRAINING SCHEMAS
+# TRAINING SCHEMAS
 # ============================================================
 #Schemas of train_model endpoint
 
